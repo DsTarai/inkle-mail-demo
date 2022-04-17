@@ -4,7 +4,7 @@ import EmailList from "./EmailList";
 const Filter = ({ data }) => {
   let tag = ["draft", "spam", "inbox", "trash", "all"];
   const [defaultTag, setDefaultTag] = useState(
-    localStorage.getItem("defaultTag")
+    localStorage.getItem("defaultTag") || "inbox"
   );
 
   const handleDefaultTag = (tag) => {

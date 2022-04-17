@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import EmailList from "./EmailList";
 
 function Search({ data }) {
   const [search, setSearch] = React.useState(null);
@@ -6,14 +7,12 @@ function Search({ data }) {
   response =
     data &&
     data.map((element) => {
-      if (element.subject.includes(search) === false) {
-        return;
-      } else {
+      if (element.subject.includes(search) === true) {
         return element;
       }
     });
   response && response.filter((elm) => elm !== "undefined");
-  console.log(response, "adskh");
+
   return (
     <div className="container">
       <div className="row">
@@ -22,17 +21,21 @@ function Search({ data }) {
             placeholder="search "
             className="w-100"
             onChange={(e) => setSearch(e.target.value)}
-            value={search}
+            value={search ? search : ""}
           />
         </div>
         {search && data ? (
           <div className="container">
             <div className="row">
               <div className="col-12">
-                {response &&
-                  response.map((data, key) => (
-                    <div key={key}>{data?.subject}</div>
-                  ))}
+                <ul className="list-group">
+                  {response &&
+                    response.map((data, key) => (
+                      <li className="list-group-item" key={key}>
+                        {data?.subject}
+                      </li>
+                    ))}
+                </ul>
               </div>
             </div>
           </div>
